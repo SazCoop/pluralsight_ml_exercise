@@ -1,4 +1,10 @@
-Data/*
-Info/*
+*.csv
+*.html
 *.cpython-35.pyc
+*.xml
+*.gitattributes
+*.iml
+*.pdf
+Questions.md
+
 
