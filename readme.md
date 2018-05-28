@@ -6,17 +6,12 @@
 
 *Exercise*
 
-Overview:
+###Overview:
 
 Code generates an API in FLASK that calculates the distance betwen users.
 Distance Metric used is Cosine similarity due to Sparsity of rating matrix.
 
 No explicit rating, create implicit rating matrix detailed below.
-
-API POST METHOD:
-
-curl -H "Content-type: application/json" \
--X POST http://127.0.0.1:8000/nearest_users_post -d '{"user_id": X}, {"number_of_neighbours": X}`'
 
 **Rating matrix is created by :**
 
@@ -30,19 +25,34 @@ curl -H "Content-type: application/json" \
 
 Average of : *User Scores Matrix:* + *User Interest Matrix:* + *Rating Matrix:* not including when it is NAN/0
 
-**To run**
-1. Install all pacakges using requirement.txt
-2. Put data files in Data/*
-3. Run the server.py
-4. First API Post will be slow, preparing matrix object
+### Usage
 
+1. Clone the project repository
 
-**To improve**
+`git clone https://github.com/SazCoop/pluralsight_ml_exercise.git`
+
+2. Install python dependencies
+
+`pip install -r requirements.txt`
+
+3. Move Data files to Data/* obtained from pluralsight zip
+
+4. CD to directory and run the server.py
+
+`python server.py`
+
+4. Use postman or curl to post to API running at localhost
+*NOTE: First API Post will be slow, preparing matrix object*
+
+` curl -H "Content-type: application/json" \ -X POST http://127.0.0.1:8000/nearest_users_post -d '{"user_id": X}, {"number_of_neighbours": X}`' `
+
+###To improve
+
 1. Set up in cloud - use docker to containerise the flask app.
 2. Run docker in amazon ECS or azure kubernetes, obtain docker image from docker hub
 3. Set up PostgresSQL database or SQLLite
 
-CodeBase: 
+###CodeBase: 
 
 `Data/*` : files provided by pluralsight
 
@@ -50,6 +60,8 @@ CodeBase:
     2. user_assessment_scores.csv
     3. user_course_views.csv
     4. user_interests.csv
+
+`Data/intermediate/*`: intermediate files folder created, matrix bject saved here
 
 `Info/*` : information about exercise
 
