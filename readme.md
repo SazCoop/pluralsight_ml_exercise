@@ -41,10 +41,14 @@ Average of : *User Scores Matrix:* + *User Interest Matrix:* + *Rating Matrix:* 
 
 `python server.py`
 
-4. Use postman or curl to post to API running at localhost
+4. Use python test.py or curl to post to API running at localhost
 *NOTE: First API Post will be slow, preparing matrix object*
 
-` curl -H "Content-type: application/json" \ -X POST http://127.0.0.1:8000/nearest_users_post -d '{"user_id": X}, {"number_of_neighbours": X}`' `
+`test/test.py`
+
+` curl localhost:80/nearest_users -H 'Content-type: application/json' -d "{"user_id": "5","number_of_neighbours": "5"}"   ` - not working
+
+
 
 ###To improve
 

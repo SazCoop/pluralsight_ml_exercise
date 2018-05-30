@@ -6,5 +6,6 @@
 *.iml
 *.pdf
 Questions.md
+*.npy
 
 
