@@ -15,10 +15,22 @@ from src.Classes.matrix_class import DistanceMatrixClass
 root = "Documents/pluralsight_ml_exercise/pluralsight_ml_exercise"
 
 def setdir():
+    """
+    sets the working directory to root above
+    :return:
+    """
     os.chdir(root)
     print(os.getcwd())
 
 def configure():
+    """
+    reads in the data files , creates joins
+
+    To do: Update to read in re odbc from database
+    :return:
+
+    pandas dataframes of files
+    """
     course_tags = pd.read_csv('Data/course_tags.csv')
     user_scores = pd.read_csv('Data/user_assessment_scores.csv')
     user_views = pd.read_csv('Data/user_course_views.csv')
@@ -29,6 +41,11 @@ def configure():
 
 
 def prepare_rating_matrix():
+    """
+    Creates rating matrix for each dataframe and gets pairwise cosine simialirty for each user
+    :return:
+    saved npy matrixes for all users x 3
+    """
     user_views, user_scores, user_interests = configure()
     ##get users in data
     int_users = list(user_interests['user_handle'].unique())
@@ -78,18 +95,17 @@ def join_similarities(matrix_list):
     matrix_mean = np.nanmean(m, axis=0)
     return matrix_mean
 
-def createfinalmatrix():
-    int_m = np.load("Data/intermediate/rating_matrix_score.npy")
-    views_m = np.load("Data/intermediate/rating_matrix_view.npy")
-    score_m = np.load("Data/intermediate/rating_matrix_int.npy")
-    # CREATE FINAL MATRIX
-    matrix_list = [int_m, views_m, score_m]
-    del (int_m, views_m, score_m)
-    rating_matrix = join_similarities(matrix_list)
-    np.save("Data/intermediate/rating_matrix", rating_matrix)
-
-
 def nearest_users(user_id, number_of_neighbours):
+    """
+    Main function to find nearest user.
+    If matrixes have not been created calls the methods above prepare matrixes
+    Uses these to extract array of ratings for user, calls similarity metric - join_similarity and gets mean of cosine similarities
+
+    :param user_id: user getting nearest users for
+    :param number_of_neighbours: number of users to return as neighbours
+    :return:
+    string of the number_of_neighbours nearest users to user_id
+    """
     if ((basename(normpath(os.getcwd()))) != 'pluralsight_ml_exercise'):
         setdir()
     matrix_list = ["rating_matrix_int.npy", "rating_matrix_score.npy", "rating_matrix_view.npy"]
@@ -100,7 +116,6 @@ def nearest_users(user_id, number_of_neighbours):
             rating_matrix_1 = np.load(matrix)
         else:
             prepare_rating_matrix()
-            createfinalmatrix()
             rating_matrix_1 = np.load(matrix)
         try:
             # index starts at 0 so add 1

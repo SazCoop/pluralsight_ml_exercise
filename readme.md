@@ -35,18 +35,31 @@ Average of : *User Scores Matrix:* + *User Interest Matrix:* + *Rating Matrix:* 
 
 `pip install -r requirements.txt`
 
-3. Move Data files to Data/* obtained from pluralsight zip
+3. Move Data files to Data/* obtained from pluralsight zip. 
 
-4. CD to directory and run the server.py
+4. In distance_function_main.py update root on line 15 if needed
+
+
+5. CD to directory and run the server.py
 
 `python server.py`
 
-4. Use python test.py or curl to post to API running at localhost
+6. Use python test.py to post to API running at localhost
 *NOTE: First API Post will be slow, preparing matrix object*
 
+POST METHOD
+
+Data as JSON: {"user_id": "X","number_of_neighbours": "X"}
+
+*user_id:* User ID of the user you want to return nearest users of (int)
+
+*number_of_neightbours:* Number of Neighbours you want to return for that user (int)
+
+See:
 `test/test.py`
 
-` curl localhost:80/nearest_users -H 'Content-type: application/json' -d "{"user_id": "5","number_of_neighbours": "5"}"   ` - not working
+Coming soon: 
+` curl -X localhost:80/nearest_users -H 'Content-type: application/json' -d "{"user_id": "5","number_of_neighbours": "5"}"   ` - not working
 
 
 
@@ -55,6 +68,8 @@ Average of : *User Scores Matrix:* + *User Interest Matrix:* + *Rating Matrix:* 
 1. Set up in cloud - use docker to containerise the flask app.
 2. Run docker in amazon ECS or azure kubernetes, obtain docker image from docker hub
 3. Set up PostgresSQL database or SQLLite
+4. Finish unit test 
+5. Store Matrix in compressed file such as h5py
 
 ###CodeBase: 
 
