@@ -12,7 +12,7 @@ root = ".."
 os.chdir(root)
 root = os.getcwd()
 from src.Classes.matrix_class import DistanceMatrixClass
-root = "Documents/pluralsight_ml_exercise/pluralsight_ml_exercise"
+root = "Documents/pluralsight_ml_exercise"
 
 def setdir():
     """
