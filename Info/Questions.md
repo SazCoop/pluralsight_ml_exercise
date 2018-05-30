@@ -3,11 +3,11 @@ Questions:
 **1. Similarity Matrix, why I chose it?**
 
 There was no explicit rating in the data, so needed to create an implicit rating matrix to calculate an USER:USER
-distance metric. I decided to use Cosine Similarity after recognizes that not all users had data for assessment scores,
+distance metric. I decided to use Cosine Similarity after recognizing that not all users had data for assessment scores,
 views and interests for each product/course type. This made my matrix very sparse. Cosine similarity works better than 
-Traditional Euclidean Distance. I choice then to get the average of the 3 different implicit rating matrixes.
+Traditional Euclidean Distance, for high dimensionality data such as data that is sparse. I chose then to get the average of the 3 different implicit rating matrixes.
 
-*User Course Views Matrix:* Composite Key of Course Tags(Obtained through a joined to Course Name) and Level Rating matrix for each user is a mean of view_time_in_seconds for each course tag-level. 
+*User Course Views Matrix:* Composite Key of Course Tags(Obtained through a join to Course Tags Table) and Level,  Rating matrix for each user is a mean of view_time_in_seconds for each course tag-level. 
 
 *User Scores Matrix:* Rating Matrix for each user is mean of assessment score for each course tag.
 
